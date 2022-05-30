@@ -6,5 +6,5 @@ views = Blueprint('views', __name__) # convention for how to name this
 
 # Remember that a view and a route are the same thing
 @views.route('/') # obviously the simplest route possible, this will be the homepage
-def home():  # couldn't be simpler: this function will run whenever we go to this page.
+def home():  # couldn't be simpler: this function runs whenever we go to this page.
     return "<h1>Test<h1>"

@@ -10,6 +10,8 @@ def create_app(): # this initializes the app
     from .views import views
     from .auth import auth
 
-
+    # in both of these cases, a slash means "no prefix":
+    app.register_blueprint(views, url_prefix='/')
+    app.register_blueprint(auth, url_prefix='/')
 
     return app
