@@ -16,7 +16,34 @@
         crossorigin="anonymous"
     />
     <!--Jinja usually puts Python in percent signs or other symbols-->
-    <title>{%%}</title>
+    <title>{% block title %}{% endblock %}</title> <!--creating a template that can be overridden in a child template (through inheritance)-->
+    
     </head>
-    <body></body>
+    <body>
+    <!--he said to take this code from his website *again*-->
+    <!--this is the javascript related to bootstrap-->
+    <!--two curly bracket sets "{{ }}"" usually means you're going to be trping some python expression-->
+    
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark"> <!--these are all bootastrap classes-->
+        <button class="navbar-toggle" type="button" data-toggle="collapse"></button>
+    </nav>
+    
+    <script
+    src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+    integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+    crossorigin="anonymous"
+    ></script>
+    <script
+    src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+    integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+    crossorigin="anonymous"
+    ></script>
+    <script
+    src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+    integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+    crossorigin="anonymous"
+    ></script>
+
+
+    </body>
 </html>
