@@ -1,4 +1,4 @@
-from flask import Blueprint
+from flask import Blueprint, render_template
 
 # we're going to define that our file is a blueprint of this application
 views = Blueprint('views', __name__) # convention for how to name this
@@ -7,4 +7,5 @@ views = Blueprint('views', __name__) # convention for how to name this
 # Remember that a view and a route are the same thing
 @views.route('/') # obviously the simplest route possible, this will be the homepage
 def home():  # couldn't be simpler: this function runs whenever we go to this page.
-    return "<h1>Test<h1>"
+    return render_template("home.html")  # this tells this route to show this template.
+
