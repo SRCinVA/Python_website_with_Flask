@@ -37,7 +37,10 @@
                 </div>
             </div> <!--no idea what is going with this ...-->
         </nav>
-    
+    <div class="container"> <!--do this to introduce some padding-->
+        {%block content%} <!--we put this in home.html, enabling us to drop content there as well-->
+        {% endblock %}
+    </div>
     <script
     src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
     integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
