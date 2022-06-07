@@ -1,9 +1,22 @@
 {% extends "base.html" %} 
-{% block title %}Login{% endblock %}
+{% block title %}Sign Up{% endblock %}
 
 <!--this template will be the same as base.html, but it will be able to override base.-->
 
 {% block content %}
-<h1>This is the Login Page</h1>
-
+<form method="POST">
+    <h3 alignment="center">Login</h3>
+    <div class="form-group">
+        <label for="email">Email Address</label>
+        <input type="email" class="form-control" id="email" name="email" placeholder="Enter email">
+        <!--the name attribute tells us what the info in this field (here, the email) will be called when passed to the backend. -->
+    </div>
+    <div class="form-group">
+        <label for="password">Password</label>
+        <input type="password" class="form-control" id="password" name="password" placeholder="Enter your password">
+        <!--the name attribute tells us what the info in this field (here, the email) will be called when passed to the backend. -->
+    <br/>
+    <button type="submit" class="btn btn-primary">Login</button>  
+</form>
 {% endblock %} 
+
