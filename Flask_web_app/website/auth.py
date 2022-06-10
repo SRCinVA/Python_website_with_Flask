@@ -1,6 +1,7 @@
+from asyncore import file_dispatcher
 from crypt import methods
 from xmlrpc.client import Boolean
-from flask import Blueprint, render_template, request
+from flask import Blueprint, render_template, request, flash
 
 # we're going to define that our file is a blueprint of this application
 auth = Blueprint('auth', __name__)  # convention for how to name this
@@ -26,15 +27,14 @@ def sign_up():
 
         # to validate the data before creating an account:
         if len(email) < 4:
-            pass
+            flash("Email must be longer than 3 characters.", category="error") # an interesting module within Flask, and you can label the category.
         elif len (firstName) < 2:
-            pass
+            flash("The first name must be longer than 1 character.", category="error")
         elif password1 != password2:
-            pass
+            flash("The passwords don\'t match.", category="error") # notice the escape character
         elif len(password1) < 7:
-            pass
+            flash("The password must be at least 7 characters long.", category="error")
         else:
-            # add user to DB
-
+            flash("Account created!", category="success")
 
     return render_template("sign_up.html")

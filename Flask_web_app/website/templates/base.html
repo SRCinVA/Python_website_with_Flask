@@ -23,20 +23,27 @@
     <!--he said to take this code from his website *again*-->
     <!--this is the javascript related to bootstrap-->
     <!--two curly bracket sets usually means you're going to be trping some python expression--> 
-        <nav class="navbar navbar-expand-lg navbar-dark bg-dark"> <!--these are all bootastrap classes-->
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbar">
-                <div class="navbar-nav">
-                    <a class="nav-item nav-link" id="login" href="/login">Login</a>
-                    <a class="nav-item nav-link" id="signUp" href="/sign-up">Sign Up</a>
-                    <a class="nav-item nav-link" id="logout" href="/logout">Logout</a>
-                    <a class="nav-item nav-link" id="home" href="/">Home</a>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark"> <!--these are all bootastrap classes-->
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbar">
+            <div class="navbar-nav">
+                <a class="nav-item nav-link" id="login" href="/login">Login</a>
+                <a class="nav-item nav-link" id="signUp" href="/sign-up">Sign Up</a>
+                <a class="nav-item nav-link" id="logout" href="/logout">Logout</a>
+                <a class="nav-item nav-link" id="home" href="/">Home</a>
 
-                </div>
+            </div>
             </div> <!--no idea what is going with this ...-->
         </nav>
+        {% with messages = get_flash_messages(with categories=true)%} <!--Jinja uses lower case for booleans-->
+        {% if messages %}
+            {% for message in messages%}
+            {% endfor %}
+        {% endwith %}                                                      
+
+
     <div class="container"> <!--do this to introduce some padding-->
         {%block content%} <!--we put this in home.html, enabling us to drop content there as well-->
         {% endblock %}
