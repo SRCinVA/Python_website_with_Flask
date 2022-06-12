@@ -37,26 +37,28 @@
             </div>
             </div> <!--no idea what is going with this ...-->
         </nav>
-        {% with messages = get_flash_messages(with categories=true)%} <!--Jinja uses lower case for booleans-->
-        {% if messages %}
-            {% for message in messages%} <!--using a for loop to go through the proper message to display-->
-            <div class="alert alert-danger alter-dismissable fade show" role="alert"> <!--alert danger will display this in red (since it si a failure message)-->
-                {{ message }}  <!--thsi enables you to go through the messages (possibly)-->
-                <button type="button" class="close" data-dismiss="alert"> <!--no explanation here-->
-                    <span aria-hidden="true">&times;</span>   <!--thsi will dispaly as a fancy x in the button-->
-                </button>
-            </div>
-
-            <div class="alert alert-success alter-dismissable fade show" role="alert"> <!--alert success will display this in green-->
-                {{ message }}  <!--thsi enables you to go through the messages (possibly)-->
-                <button type="button" class="close" data-dismiss="alert"> <!--no explanation here-->
-                    <span aria-hidden="true">&times;</span>   <!--thsi will dispaly as a fancy x in the button-->
-                </button>
-            </div>
-
-            {% endfor %}
+        <!--placing this here in the base template means that it will display in any of our pages.-->
+        {% with messages = get_flashed_messages(with_categories=true)%} <!--Jinja uses lower case for booleans-->
+            {% if messages %}
+                {% for category, message in messages%} <!--using a for loop to go through the proper message to display, taking in the category, it seeems-->
+                    {% if category == "error"%}
+                    <div class="alert alert-danger alter-dismissable fade show" role="alert"> <!--alert danger will display this in red (since it si a failure message)-->
+                        {{ message }}  <!--thsi enables you to go through the messages (possibly)-->
+                        <button type="button" class="close" data-dismiss="alert"> <!--no explanation here-->
+                            <span aria-hidden="true">&times;</span>   <!--thsi will dispaly as a fancy x in the button-->
+                        </button>
+                    </div>
+                    {% else %} <!--if it's not an error, then it's success-->
+                    <div class="alert alert-success alter-dismissable fade show" role="alert"> <!--alert success will display this in green-->
+                        {{ message }}  <!--thsi enables you to go through the messages (possibly)-->
+                        <button type="button" class="close" data-dismiss="alert"> <!--no explanation here-->
+                            <span aria-hidden="true">&times;</span>   <!--thsi will dispaly as a fancy x in the button-->
+                        </button>
+                    </div>
+                    {% endif %}
+                {% endfor %}
+            {% endif %}
         {% endwith %}                                                      
-
 
     <div class="container"> <!--do this to introduce some padding-->
         {%block content%} <!--we put this in home.html, enabling us to drop content there as well-->
