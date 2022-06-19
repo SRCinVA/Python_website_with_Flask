@@ -1,5 +1,6 @@
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
+from os import path  # this will help us determine if hte path the DB exists.
 
 db = SQLAlchemy() # this initializes the DB as an object
 DB_NAME = "database.db"  # (obviously) this is the name.
@@ -22,4 +23,13 @@ def create_app(): # this initializes the app
     app.register_blueprint(views, url_prefix='/')
     app.register_blueprint(auth, url_prefix='/')
 
+    from .models import User, Note # we do this to make sure that these files run before we create the DB (makes sense)
+
+    create_database(app)
+
     return app
+
+def create_database(app):  # this will check to see if the DB exists. If it doesn't, it will create one. If it does, it won't overwrite it.
+    if not path.exists("website/" + DB_NAME):
+        db.create_all(app = app)  # actually creates the db (if it doesn't exist)
+        print("Created database!")
