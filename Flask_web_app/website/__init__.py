@@ -31,5 +31,5 @@ def create_app(): # this initializes the app
 
 def create_database(app):  # this will check to see if the DB exists. If it doesn't, it will create one. If it does, it won't overwrite it.
     if not path.exists("website/" + DB_NAME):
-        db.create_all(app = app)  # actually creates the db (if it doesn't exist)
+        db.create_all(app = app)  # actually creates the db (if it doesn't exist). We pass in the name of the application we are creating the DB for.
         print("Created database!")

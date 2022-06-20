@@ -2,6 +2,8 @@ from asyncore import file_dispatcher
 from crypt import methods
 from xmlrpc.client import Boolean
 from flask import Blueprint, render_template, request, flash
+from .models import User
+from werkzueg.security import generate_password_hash, check_password_hash
 
 # we're going to define that our file is a blueprint of this application
 auth = Blueprint('auth', __name__)  # convention for how to name this
@@ -35,6 +37,7 @@ def sign_up():
         elif len(password1) < 7:
             flash("The password must be at least 7 characters long.", category="error")
         else:
+            new_user = User(email = email, firstName = firstName, password)  # here, we are importing a new user. 
             flash("Account created!", category="success")
 
     return render_template("sign_up.html")
