@@ -1,7 +1,7 @@
 from asyncore import file_dispatcher
 from crypt import methods
 from xmlrpc.client import Boolean
-from flask import Blueprint, render_template, request, flash
+from flask import Blueprint, render_template, request, flash, redirect, url_for
 from .models import User
 from werkzueg.security import generate_password_hash, check_password_hash
 
@@ -37,7 +37,15 @@ def sign_up():
         elif len(password1) < 7:
             flash("The password must be at least 7 characters long.", category="error")
         else:
-            new_user = User(email = email, firstName = firstName, password)  # here, we are importing a new user. 
+            new_user = User(email = email, firstName = firstName, password = generate_password_hash(password1, method="sha256"))  # here, we are importing a new user. 
+            db.session.add(new_user) # adds the user to the db
+            db.session.commit()      # commits it to the database
             flash("Account created!", category="success")
+            # Related note:
+            # sha256 is a hashing algorithm, which hashes the password into a new form such that the old form can't be retrieved (making it more secure).
+            # now we need to add it to the database
+            # after we create the user, we should redirect them to the sign-in page.
+            # here, we will return a redirect to the url for the homepage:
+            
 
     return render_template("sign_up.html")
