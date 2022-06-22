@@ -3,7 +3,7 @@ from crypt import methods
 from xmlrpc.client import Boolean
 from flask import Blueprint, render_template, request, flash, redirect, url_for
 from .models import User
-from werkzueg.security import generate_password_hash, check_password_hash
+from werkzeug.security import generate_password_hash, check_password_hash
 
 # we're going to define that our file is a blueprint of this application
 auth = Blueprint('auth', __name__)  # convention for how to name this
@@ -45,7 +45,8 @@ def sign_up():
             # sha256 is a hashing algorithm, which hashes the password into a new form such that the old form can't be retrieved (making it more secure).
             # now we need to add it to the database
             # after we create the user, we should redirect them to the sign-in page.
-            # here, we will return a redirect to the url for the homepage:
-            
+            # net, we will return a redirect to the url for the homepage:
+            return redirect(url_for("views.home"))  # we want to go there to the 'home' function of the 'views' blueprint.
+                                                    # it's better to spell out the url_for and the page name. If you just cited the direct link ('/') you could never change it.
 
     return render_template("sign_up.html")
