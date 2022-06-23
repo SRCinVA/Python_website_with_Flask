@@ -4,6 +4,7 @@ from xmlrpc.client import Boolean
 from flask import Blueprint, render_template, request, flash, redirect, url_for
 from .models import User
 from werkzeug.security import generate_password_hash, check_password_hash
+from . import db
 
 # we're going to define that our file is a blueprint of this application
 auth = Blueprint('auth', __name__)  # convention for how to name this
@@ -23,21 +24,21 @@ def logout():
 def sign_up():
     if request.method == "POST":
         email = request.form.get('email') # as in, 'get' the email from the form (we still want to post to the backend).
-        firstName = request.form.get('firstName') 
+        first_name = request.form.get('firstName') 
         password1 = request.form.get('password1')
         password2 = request.form.get('password2')
 
         # to validate the data before creating an account:
         if len(email) < 4:
             flash("Email must be longer than 3 characters.", category="error") # an interesting module within Flask, and you can label the category.
-        elif len (firstName) < 2:
+        elif len (first_name) < 2:
             flash("The first name must be longer than 1 character.", category="error")
         elif password1 != password2:
             flash("The passwords don\'t match.", category="error") # notice the escape character
         elif len(password1) < 7:
             flash("The password must be at least 7 characters long.", category="error")
         else:
-            new_user = User(email = email, firstName = firstName, password = generate_password_hash(password1, method="sha256"))  # here, we are importing a new user. 
+            new_user = User(email = email, first_name = first_name, password = generate_password_hash(password1, method="sha256"))  # here, we are importing a new user. 
             db.session.add(new_user) # adds the user to the db
             db.session.commit()      # commits it to the database
             flash("Account created!", category="success")

@@ -1,6 +1,7 @@
 from time import timezone
 from . import db  # here the dot refers to the overall package. Form outside the directory it would be 'website'
 from flask_login import UserMixin
+from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy.sql import func
 
 class Note(db.Model):  # this is a "much more general class" (not sure what he means by that ...)
